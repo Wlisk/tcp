@@ -5,16 +5,20 @@ import java.lang.Math;
 public class PosicaoMapa4x4 {
     private int x, y;
     private static int numPosicoesOcupadas;
+    private String name;
+    private static final int MAX_NAME_SIZE = 2;
 
     //--------------------------------------------------------------------
     public PosicaoMapa4x4() {
         this.reset();
+        this.name = "X";
         ++numPosicoesOcupadas;
     }
 
     public PosicaoMapa4x4(int x, int y) {
         this.x = x;
         this.y = y;
+        this.name = "X";
         ++numPosicoesOcupadas;
     }
 
@@ -47,10 +51,21 @@ public class PosicaoMapa4x4 {
     }
 
     //--------------------------------------------------------------------
+    public String getName() { return this.name; }
+
+    public void setName(String name) { 
+        name = name.toUpperCase();
+
+        if(name.length() > MAX_NAME_SIZE)
+            this.name = name.substring(0, MAX_NAME_SIZE);
+        this.name = name;
+    }
+
+    //--------------------------------------------------------------------
     public PosicaoMapa4x4 copy() { return new PosicaoMapa4x4(this.x, this.y); }
 
     public void imprime() {
-        System.out.println(String.format("({0}, {1})", this.x, this.y));
+        System.out.println(String.format("%s (%d, %d)", this.name, this.x, this.y));
     }
 
     public int distancia(PosicaoMapa4x4 p) { 
