@@ -31,13 +31,16 @@ public class Turma {
 
         this.numAlunos = alunos.size();
         this.numMonitores = monitores.size();
-        this.professor = professor;
-        this.monitores = monitores;
-        this.alunos = alunos;
     }
 
     public boolean adicionaAluno(Aluno aluno) {
-        if(aluno == null || alunos.size() == MAX_NUM_ALUNOS) return false;
+        if(aluno == null) return false;
+
+        if(alunos.size() == MAX_NUM_ALUNOS) {
+            System.out.println("Não foi possivel adicionar aluno com matricula" + aluno.getNumeroMatricula() + ". Max num alunos atingido na turma.");
+            return false;
+        }
+
 
         this.alunos.add(aluno);
         return true;
@@ -46,7 +49,10 @@ public class Turma {
     public boolean removeAluno() {
         final int removeIndex = this.alunos.size() - 1;
 
-        if(this.alunos.isEmpty() || alunos.size() == MIN_NUM_ALUNOS) return false;
+        if(this.alunos.isEmpty() || alunos.size() == MIN_NUM_ALUNOS) {
+            System.out.println("Min num alunos atingido na turma.");
+            return false;
+        }
 
         this.alunos.remove(removeIndex);
         return true;
